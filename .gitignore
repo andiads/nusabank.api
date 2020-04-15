@@ -10,10 +10,10 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Ignoring all folders except /src/
-/target/
-/.settings/
-/.mvn/
+# Ignoring all folders except src
+target/
+.settings/
+.mvn/
 
 # Package Files #
 *.jar
