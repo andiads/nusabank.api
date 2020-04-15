@@ -91,10 +91,40 @@ public class NasabahController {
 	}
 	
 
-	// post new nasabah
+	/*
+	 *  adding new API requests method and merge to master soon~
+	 */
 	
+	// POST new nasabah 
+	@PostMapping("/nasabah/new")
+	public Nasabah createNasabah(@Valid @RequestBody Nasabah nasabah) {
+		return nasabahRepository.save(nasabah);
+	}
 	
-	// update
+	// update / PUT
+	@PutMapping("/nasabah/edit/{id}")
+	public Nasabah updateNasabah(@PathVariable(value = "id") int id,
+			@Valid @RequestBody Nasabah nasabahDetails ) {
+		
+		Nasabah nasabah = nasabahRepository.findById(id)
+				.orElseThrow(()-> new NasabahNotFoundException("Nasabah", "id", id));
+		
+		nasabah.setNama(nasabahDetails.getNama());
+		nasabah.setEmail(nasabahDetails.getEmail());
+		nasabah.setPekerjaan(nasabahDetails.getPekerjaan());
+		nasabah.setPhoto(nasabahDetails.getPhoto());
+		
+		Nasabah updatedNasabah = nasabahRepository.save(nasabah);
+		return updatedNasabah;
+	}
 	
-	// delete
+	// delete / REMOVE
+	@DeleteMapping("/nasabah/delete/{id}")
+	public ResponseEntity<?> deleteNasabah(@PathVariable(value = "id") int id){
+		Nasabah nasabah = nasabahRepository.findById(id)
+				.orElseThrow(() -> new NasabahNotFoundException("Nasabah", "id", id));
+		nasabahRepository.delete(nasabah);
+		
+		return ResponseEntity.ok().build();
+	}
 }
