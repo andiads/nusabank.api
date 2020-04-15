@@ -11,9 +11,9 @@
 .mtj.tmp/
 
 # Ignoring all folders except /src/
-target/
-.settings/
-.mvn/
+/target/
+/.settings/
+/.mvn/
 
 # Package Files #
 *.jar
